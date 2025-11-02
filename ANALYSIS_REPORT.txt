@@ -1,0 +1,108 @@
+================================================================================
+           SMART CITY SCHEDULING - COMPREHENSIVE ANALYSIS REPORT
+================================================================================
+
+SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total datasets processed: 9
+
+DATASET OVERVIEW
+--------------------------------------------------------------------------------
+Dataset                   | Vertices |    Edges |     SCCs |  Largest SCC
+--------------------------------------------------------------------------------
+small_cyclic_1.json       |        8 |       26 |        2 |            7
+small_dag_1.json          |        7 |       10 |        7 |            1
+small_cyclic_2.json       |       10 |       22 |        4 |            7
+medium_mixed_1.json       |       15 |       49 |        2 |           14
+medium_mixed_2.json       |       18 |       78 |        1 |           18
+medium_dag_1.json         |       20 |       28 |       20 |            1
+large_sparse_1.json       |       30 |       94 |        3 |           28
+large_dense_1.json        |       40 |      230 |        1 |           40
+large_dag_1.json          |       50 |      105 |       50 |            1
+
+SCC ALGORITHM PERFORMANCE (Tarjan's Algorithm)
+--------------------------------------------------------------------------------
+Dataset                   |  Time (ms) |   DFS Visits | Edge Traversals
+--------------------------------------------------------------------------------
+small_cyclic_1.json       |      0,137 |            8 |              26
+small_dag_1.json          |      0,027 |            7 |              10
+small_cyclic_2.json       |      0,039 |           10 |              22
+medium_mixed_1.json       |      0,106 |           15 |              49
+medium_mixed_2.json       |      0,070 |           18 |              78
+medium_dag_1.json         |      0,111 |           20 |              28
+large_sparse_1.json       |      0,086 |           30 |              94
+large_dense_1.json        |      0,157 |           40 |             230
+large_dag_1.json          |      0,141 |           50 |             105
+
+TOPOLOGICAL SORT PERFORMANCE (Kahn's Algorithm)
+--------------------------------------------------------------------------------
+Dataset                   |  Time (ms) |       Queue Ops |  Cond. Edges
+--------------------------------------------------------------------------------
+small_cyclic_1.json       |      0,030 |               2 |            1
+small_dag_1.json          |      0,015 |               7 |           10
+small_cyclic_2.json       |      0,009 |               4 |            3
+medium_mixed_1.json       |      0,017 |               2 |            1
+medium_mixed_2.json       |      0,006 |               1 |            0
+medium_dag_1.json         |      0,032 |              20 |           28
+large_sparse_1.json       |      0,017 |               3 |            2
+large_dense_1.json        |      0,004 |               1 |            0
+large_dag_1.json          |      0,081 |              50 |          105
+
+DAG SHORTEST PATH PERFORMANCE
+--------------------------------------------------------------------------------
+Dataset                   |  Time (ms) |  Relaxations |  Reachable |   Critical Path
+--------------------------------------------------------------------------------
+small_cyclic_1.json       |      0,006 |            0 |          1 |               0
+small_dag_1.json          |      0,015 |            6 |          5 |              11
+small_cyclic_2.json       |      0,003 |            1 |          2 |              10
+medium_mixed_1.json       |      0,001 |            0 |          1 |               0
+medium_mixed_2.json       |      0,001 |            0 |          1 |               0
+medium_dag_1.json         |      0,010 |            8 |          7 |              47
+large_sparse_1.json       |      0,001 |            0 |          1 |               0
+large_dense_1.json        |      0,001 |            0 |          1 |               0
+large_dag_1.json          |      0,013 |           26 |         19 |             119
+
+ANALYSIS
+--------------------------------------------------------------------------------
+
+1. SCC Algorithm Bottlenecks:
+   - Tarjan's algorithm shows O(V+E) complexity as expected
+   - Time increases proportionally with edge count
+   - Dense graphs have more edge traversals but similar DFS visits
+
+2. Effect of Graph Structure:
+   - Cyclic graphs compress into fewer components
+   - Large SCCs indicate tightly coupled task dependencies
+   - Pure DAGs have SCC count equal to vertex count
+
+3. Topological Sort Performance:
+   - Kahn's algorithm performance depends on condensation edge count
+   - Queue operations correlate with condensation vertex count
+   - Sparse condensation graphs sort faster
+
+4. DAG Shortest Path Insights:
+   - Number of relaxations depends on edge density in condensation
+   - Critical path identifies longest task dependency chain
+   - Reachability varies based on graph connectivity structure
+
+CONCLUSIONS
+--------------------------------------------------------------------------------
+
+• For strongly connected task dependencies:
+  - Use Tarjan's SCC to identify tightly coupled task groups
+  - Compress into meta-tasks to simplify scheduling
+
+• For dependency ordering:
+  - Kahn's algorithm provides intuitive level-by-level processing
+  - DFS variant is simpler but less intuitive for scheduling
+
+• For critical path analysis:
+  - DAG longest path identifies project completion time
+  - Useful for resource allocation and deadline planning
+
+• Practical recommendation:
+  - Always detect cycles first (SCC) before scheduling
+  - Use condensation graph for scalable dependency management
+  - Critical path guides priority assignment
+
+End of Report

@@ -97,17 +97,17 @@ public class DatasetGenerator {
 
     public static void main(String[] args) {
         try {
-            saveToFile(generateGraph(8, 0.3, 10, true), "data/small_cyclic_1.json");
-            saveToFile(generateDAG(7, 0.4, 8), "data/small_dag_1.json");
-            saveToFile(generateGraph(10, 0.25, 12, true), "data/small_cyclic_2.json");
+            saveToFile(generateGraph(8, 0.3, 10, true), "output/small_cyclic_1.json");
+            saveToFile(generateDAG(7, 0.4, 8), "output/small_dag_1.json");
+            saveToFile(generateGraph(10, 0.25, 12, true), "output/small_cyclic_2.json");
 
-            saveToFile(generateGraph(15, 0.2, 15, true), "data/medium_mixed_1.json");
-            saveToFile(generateGraph(18, 0.25, 20, true), "data/medium_mixed_2.json");
-            saveToFile(generateDAG(20, 0.15, 18), "data/medium_dag_1.json");
+            saveToFile(generateGraph(15, 0.2, 15, true), "output/medium_mixed_1.json");
+            saveToFile(generateGraph(18, 0.25, 20, true), "output/medium_mixed_2.json");
+            saveToFile(generateDAG(20, 0.15, 18), "output/medium_dag_1.json");
 
-            saveToFile(generateGraph(30, 0.1, 25, true), "data/large_sparse_1.json");
-            saveToFile(generateGraph(40, 0.15, 30, true), "data/large_dense_1.json");
-            saveToFile(generateDAG(50, 0.08, 35), "data/large_dag_1.json");
+            saveToFile(generateGraph(30, 0.1, 25, true), "output/large_sparse_1.json");
+            saveToFile(generateGraph(40, 0.15, 30, true), "output/large_dense_1.json");
+            saveToFile(generateDAG(50, 0.08, 35), "output/large_dag_1.json");
 
             System.out.println("All datasets generated successfully!");
 
